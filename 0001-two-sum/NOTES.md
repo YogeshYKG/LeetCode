@@ -14,13 +14,15 @@ Technique: Uses a HashMap to store each number and its corresponding index while
 
 Logic:
 
-Traverse the array.
-
-For each element, check if the complement (target - current number) exists in the HashMap.
-
-If found, return the indices.
-
-Otherwise, add the current number and its index to the HashMap.
+unordered_map<int, int> hashMap;
+for (int i = 0; i < nums.size(); i++) {
+    int complement = target - nums[i];
+    if (hashMap.find(complement) != hashMap.end()) {
+        return {hashMap[complement], i};
+    }
+    hashMap[nums[i]] = i;
+}
+return {};
 
 Complexity
 
@@ -38,17 +40,19 @@ Technique: Uses two pointers to traverse the array from both ends.
 
 Logic:
 
-Sort the array while preserving original indices.
-
-Use two pointers: one starting from the beginning (smallest number) and the other from the end (largest number).
-
-Adjust the pointers based on the sum:
-
-If the sum is equal to the target, return the original indices.
-
-If the sum is less than the target, move the left pointer.
-
-If the sum is greater than the target, move the right pointer.
+sort(nums.begin(), nums.end());
+int left = 0, right = nums.size() - 1;
+while (left < right) {
+    int sum = nums[left] + nums[right];
+    if (sum == target) {
+        return {left, right};
+    } else if (sum < target) {
+        left++;
+    } else {
+        right--;
+    }
+}
+return {};
 
 Complexity
 
@@ -66,17 +70,22 @@ Technique: Attempts to make optimal local choices to find the target.
 
 Logic:
 
-Traverse the array while maintaining a record of encountered numbers.
-
-Check each new number to see if it forms a valid pair with any previously seen number.
-
-If so, return the result.
+vector<int> numsSorted = nums; 
+sort(numsSorted.begin(), numsSorted.end());
+for (int i = 0; i < nums.size(); i++) {
+    for (int j = i + 1; j < nums.size(); j++) {
+        if (numsSorted[i] + numsSorted[j] == target) {
+            return {i, j};
+        }
+    }
+}
+return {};
 
 Complexity
 
-Time Complexity: Depends on the implementation. Generally similar to the HashMap approach.
+Time Complexity: O(n^2) in worst case for nested loops.
 
-Space Complexity: Similar to the HashMap approach.
+Space Complexity: O(1) additional space.
 
 Summary
 
