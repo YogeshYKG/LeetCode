@@ -1,4 +1,4 @@
-// Greedy Approach
+// Two Pointer Approach
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -17,12 +17,12 @@ public:
             int sum = indexedNums[left].first + indexedNums[right].first;
 
             if (sum == target) {
-                // Return the original indices
+                // Return the original indices in any order
                 return {indexedNums[left].second, indexedNums[right].second};
             } else if (sum < target) {
-                left++;
+                left++; // Move the left pointer to increase the sum
             } else {
-                right--;
+                right--; // Move the right pointer to decrease the sum
             }
         }
 
