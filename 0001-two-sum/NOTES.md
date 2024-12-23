@@ -10,6 +10,7 @@ Description
 - Technique: Uses a HashMap to store each number and its corresponding index while traversing the array.
 
 Logic
+<pre>
 unordered_map<int, int> hashMap;
 for (int i = 0; i < nums.size(); i++) {
     int complement = target - nums[i];
@@ -19,7 +20,7 @@ for (int i = 0; i < nums.size(); i++) {
     hashMap[nums[i]] = i;
 }
 return {};
-
+</pre>
 Complexity
 - Time Complexity: O(n), as each element is processed once.
 - Space Complexity: O(n), due to the HashMap.
@@ -31,6 +32,7 @@ Description
 - Technique: Uses two pointers to traverse the array from both ends.
 
 Logic
+<pre>
 sort(nums.begin(), nums.end());
 int left = 0, right = nums.size() - 1;
 while (left < right) {
@@ -44,6 +46,7 @@ while (left < right) {
     }
 }
 return {};
+</pre>
 
 Complexity
 - Time Complexity: O(n log n) for sorting + O(n) for the two-pointer traversal.
@@ -56,6 +59,7 @@ Description
 - Technique: Attempts to make optimal local choices to find the target.
 
 Logic
+<pre>
 vector<int> numsSorted = nums;
 sort(numsSorted.begin(), numsSorted.end());
 for (int i = 0; i < nums.size(); i++) {
@@ -66,6 +70,7 @@ for (int i = 0; i < nums.size(); i++) {
     }
 }
 return {};
+</pre>
 
 Complexity
 - Time Complexity: O(n^2) in the worst case for nested loops.
